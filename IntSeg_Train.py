@@ -183,10 +183,10 @@ for epoch in range(1,101):
 
         if input_images[id] is None:
             # The input image
-            input_images[id] = cv2.imread(voc_im_path + "/" + train_im_names[id]+".jpg",-1)
+            input_images[id] = cv2.imread(im_path + "/" + train_im_names[id]+".jpg",-1)
         if output_masks[id] is None:
             # The SBD Groundtruth mask
-            mat_contents = sio.loadmat(voc_seg_path + "/" + train_im_names[id] + ".mat")
+            mat_contents = sio.loadmat(seg_path + "/" + train_im_names[id] + ".mat")
             tmpstr = mat_contents['GTinst']
             tmpmat = tmpstr[0,0]
             output_masks[id] = tmpmat['Segmentation']
@@ -243,7 +243,7 @@ for epoch in range(1,101):
     target = open("result64_vgg19_RDL6_IoU_dt_pt_ct_tanh/%04d/test_score.txt" % epoch, 'w')
 
     for id in range(100):
-        input_image = cv2.imread(voc_im_path + "/" + val_im_names[id] + ".jpg", -1)
+        input_image = cv2.imread(im_path + "/" + val_im_names[id] + ".jpg", -1)
         input_pos = cv2.imread("./val" + "/" + val_im_names[id] + "/ints/%03d_%03d_pos.png" % (1, 1), -1)
         input_neg = cv2.imread("./val" + "/" + val_im_names[id] + "/ints/%03d_%03d_neg.png" % (1, 1), -1)
         input_pos_clks = deepcopy(input_pos)
